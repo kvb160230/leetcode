@@ -1,0 +1,16 @@
+name: Sync Leetcode
+on:
+  workflow_dispatch: # Allows manual trigger
+  schedule:
+    - cron: "0 0 * * *" # Automatically runs every single day at midnight (UTC)
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync Solutions
+        uses: joshcai/leetcode-sync@v1.7
+        with:
+          github-token: ${{ github.token }}
+          leetcode-csrf-token: ${{ secrets.LEETCODE_CSRF_TOKEN }}
+          leetcode-session: ${{ secrets.LEETCODE_SESSION }}
+          destination-folder: solutions
